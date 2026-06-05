@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | STYLEHUB</title>
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body class="admin-page">
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span>STYLEHUB ADMIN</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link active">Panel</a>
+        <a href="#categories" class="nav-link">Colecciones</a>
+        <a href="#products" class="nav-link">Inventario</a>
+        <a href="#orders" class="nav-link">Compras</a>
+      </nav>
+
+      <button id="logoutButton" class="btn btn-secondary sidebar-logout">
+        Cerrar sesión
+      </button>
+    </aside>
+
+    <main class="admin-main">
+
+      <header class="dashboard-header">
+        <div>
+          <p class="dashboard-kicker">STYLEHUB ADMIN</p>
+          <h1>Centro de Gestión</h1>
+          <p class="dashboard-description">
+            Administra inventario, catálogo y pedidos desde un único panel de control.
+          </p>
+        </div>
+
+        <div class="dashboard-header-meta">
+          <span class="status-pill">Sistema activo</span>
+          <p id="lastSessionText">Última sesión: cargando...</p>
+        </div>
+      </header>
+
+      <section class="dashboard-cards" id="dashboardCards">
+
+        <article class="dashboard-card">
+          <p class="card-label">Inventario</p>
+          <h2 id="productCount">0</h2>
+          <p class="card-note">Prendas disponibles en catálogo.</p>
+        </article>
+
+        <article class="dashboard-card">
+          <p class="card-label">Colecciones</p>
+          <h2 id="categoryCount">0</h2>
+          <p class="card-note">Secciones organizadas para el catálogo.</p>
+        </article>
+
+        <article class="dashboard-card">
+          <p class="card-label">Compras</p>
+          <h2 id="orderCount">0</h2>
+          <p class="card-note">Órdenes registradas en el sistema.</p>
+        </article>
+
+      </section>
+
+      <section class="dashboard-section" id="categories">
+        <div class="section-card">
+
+          <div class="categories-toolbar">
+            <div>
+              <p class="section-title">Gestión de colecciones</p>
+              <p class="section-text">
+                Organiza las categorías que agrupan los productos de la tienda.
+              </p>
+            </div>
+
+            <button id="addCategoryButton" class="btn btn-primary">
+              Nueva colección
+            </button>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="dashboard-table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="categoryTableBody"></tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+      <modal-dialog id="categoryModal">
+        <div id="categoryModalContent"></div>
+      </modal-dialog>
+
+      <section class="dashboard-section" id="products">
+        <div class="section-card">
+
+          <div class="categories-toolbar">
+            <div>
+              <p class="section-title">Gestión de inventario</p>
+              <p class="section-text">
+                Crea, actualiza y elimina productos disponibles para los clientes.
+              </p>
+            </div>
+
+            <button id="addProductButton" class="btn btn-primary">
+              Nuevo producto
+            </button>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="dashboard-table">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Nombre</th>
+                  <th>Categoría</th>
+                  <th>Precio</th>
+                  <th>Imagen</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="productTableBody"></tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+      <modal-dialog id="productModal">
+        <div id="productModalContent"></div>
+      </modal-dialog>
+
+      <section class="dashboard-section" id="orders">
+        <div class="section-card">
+
+          <div class="section-card-top">
+            <p class="section-title">Historial de compras</p>
+            <span class="status-pill small">Activo</span>
+          </div>
+
+          <p class="section-text">
+            Consulta las compras realizadas por los clientes y revisa sus detalles.
+          </p>
+
+          <div class="table-actions-row">
+            <button id="exportOrdersButton" class="btn btn-secondary">
+              Exportar CSV
+            </button>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="dashboard-table">
+              <thead>
+                <tr>
+                  <th>ID Pedido</th>
+                  <th>Fecha</th>
+                  <th>Cliente</th>
+                  <th>Teléfono</th>
+                  <th>Dirección</th>
+                  <th>Total</th>
+                  <th>Productos</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="orderTableBody"></tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+      <modal-dialog id="orderModal">
+        <div id="orderModalContent"></div>
+      </modal-dialog>
+
+      <modal-dialog id="confirmModal">
+        <div id="confirmModalContent"></div>
+      </modal-dialog>
+
+      <section class="dashboard-section">
+        <div class="section-card">
+
+          <div class="section-card-top">
+            <p class="section-title">Resumen del sistema</p>
+            <span class="status-pill small">STYLEHUB</span>
+          </div>
+
+          <p class="section-text">
+            Panel desarrollado para la gestión integral del catálogo, inventario y seguimiento de pedidos.
+          </p>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module" src="components/modal-dialog.js"></script>
+  <script type="module" src="js/categories.js"></script>
+  <script type="module" src="js/products-admin.js"></script>
+  <script type="module" src="js/orders-admin.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>
